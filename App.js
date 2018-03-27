@@ -72,76 +72,7 @@ export default class App extends Component<Props> {
       messageFromWebView: null
     }
   }
-  getInitialState() {
-    return {
-      url: SITE_URL,
-      // OR
-      // you can use a source object like React Native Webview.
-      // source {uri: string, method: string, headers: object, body: string}, {html: string, baseUrl: string}
-      // Loads static html or a uri (with optional headers) in the WebView. <Just like React Native's version>
-      // source: {
-      //   uri: SITE_URL,
-      //   headers: {
-      //     ...
-      //   },
-      // },
-      status: 'No Page Loaded',
-      backButtonEnabled: true,
-      forwardButtonEnabled: true,
-      loading: true,
-      messageFromWebView: null
-    };
-  }
-  goBack() {
-    console.log("on go back");
-      // you can use this callback to control web view
-      this.ref.webViewAndroidSample.goBack();
-  }
-  goForward(){
-    this.refs.webViewAndroidSample.goForward();
-  }
-  reload(){
-    this.refs.webViewAndroidSample.reload();
-  }
-  stopLoading(){
-    // stops the current load
-    this.refs.webViewAndroidSample.stopLoading();
-  }
-  postMessage(data){
-  // posts a message to web view
-  this.refs.webViewAndroidSample.postMessage(data);
-  }
-  injectJavaScript(script) {
-    // executes JavaScript immediately in web view
-    this.refs.webViewAndroidSample.injectJavaScript(script);
-  }
-  onNavigationStateChange(event) {
-    console.log(event);
-    this.setState({
-      backButtonEnabled: true,
-      forwardButtonEnabled: true,
-      url: event.url,
-      status: event.title,
-      loading: event.loading
-    });
-  }
-  onMessage(event) {
-    this.setState({
-      messageFromWebView: event.message
-    });
-  }
-  javascriptToInject() {
-    return `
-      $(document).ready(function() {
-        $('a').click(function(event) {
-          if ($(this).attr('href')) {
-            var href = $(this).attr('href');
-            window.webView.postMessage('Link tapped: ' + href);
-          }
-        })
-      })
-    `
-  }
+  
   onBack() {
     this.refs[WEBVIEW_REF].goBack();
   }
@@ -171,18 +102,6 @@ export default class App extends Component<Props> {
           /> 
       </View>
     );
-    // return (
-    //     <WebViewAndroid
-    //       ref="webViewAndroidSample"
-    //       javaScriptEnabled={true}
-    //       geolocationEnabled={false}
-    //       builtInZoomControls={false}
-    //       injectedJavaScript={this.javascriptToInject()}
-    //       onNavigationStateChange={this.onNavigationStateChange}
-    //       onMessage={this.onMessage}
-    //       style={styles.containerWebView}
-    //       url={SITE_URL} />
-    // );
   }
 }
 
