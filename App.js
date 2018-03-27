@@ -27,49 +27,12 @@ var SITE_URL = "https://www.google.com";
 
 const WEBVIEW_REF = "WEBVIEW_REF";
 
-function getInitialState() {
-  return {
-    url: SITE_URL,
-    // OR
-    // you can use a source object like React Native Webview.
-    // source {uri: string, method: string, headers: object, body: string}, {html: string, baseUrl: string}
-    // Loads static html or a uri (with optional headers) in the WebView. <Just like React Native's version>
-    // source: {
-    //   uri: SITE_URL,
-    //   headers: {
-    //     ...
-    //   },
-    // },
-    status: 'No Page Loaded',
-    backButtonEnabled: false,
-    forwardButtonEnabled: false,
-    loading: true,
-    messageFromWebView: null
-  };
-}
-
 export default class App extends Component<Props> {
   constructor(props){
     super(props)
     this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
     this.state = {
       canGoBack: false,
-      url: SITE_URL,
-      // OR
-      // you can use a source object like React Native Webview.
-      // source {uri: string, method: string, headers: object, body: string}, {html: string, baseUrl: string}
-      // Loads static html or a uri (with optional headers) in the WebView. <Just like React Native's version>
-      // source: {
-      //   uri: SITE_URL,
-      //   headers: {
-      //     ...
-      //   },
-      // },
-      status: 'No Page Loaded',
-      backButtonEnabled: false,
-      forwardButtonEnabled: false,
-      loading: true,
-      messageFromWebView: null
     }
   }
   
